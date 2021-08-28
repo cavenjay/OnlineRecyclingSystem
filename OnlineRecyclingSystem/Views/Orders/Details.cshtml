@@ -1,0 +1,84 @@
+﻿@model OnlineRecyclingSystem.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CusName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CusName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CusContact)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CusContact)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CusAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CusAddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BigBottle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BigBottle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SmallBottle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SmallBottle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Can)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Can)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DriverName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DriverName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DriverContact)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DriverContact)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

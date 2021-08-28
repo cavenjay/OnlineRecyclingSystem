@@ -1,0 +1,147 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<head>
+    <style>
+        body {
+            background-color: #b8f1cd;
+            /**gradient background*/
+            background: linear-gradient(180deg, #ffffff, #b8f1cd );
+        }
+        .button5 {
+            background-color: black;
+            color: white;
+            border: 2px solid #555555;
+            width: 50%;
+        }
+
+            .button5:hover {
+                background-color: white;
+                color: black;
+            }
+    </style>
+    <!--<link href="~/css/userpage.css" rel="stylesheet" type="text/css" />-->
+</head>
+<head runat="server">
+    <title>Get User Current Location using Google Map Geolocation API Service in asp.net website</title>
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0
+        }
+
+        #map_canvas {
+            height: 100%
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEF-Z3DNDyKgcHdy8G2FS3uie0iBj1ArU&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success);
+    } else {
+        alert("Geo Location is not supported on your current browser!");
+    }
+    function success(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var city = position.coords.locality;
+        var myLatlng = new google.maps.LatLng(latitude, longitude);
+        var myOptions = {
+            center: myLatlng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "lat: " + latitude + " long: " + longitude
+        });
+
+        marker.setMap(map);
+        var infowindow = new google.maps.InfoWindow({ content: "<b>Your Address</b><br/> Latitude:" + latitude + "<br /> Longitude:" + longitude + "" });
+        infowindow.open(map, marker);
+    }
+    </script>
+</head>
+
+
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="user_form">
+                <div class="form-header">
+                    <h4>Sign Up a New Account!</h4>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.User_Role"></label>
+                    <select asp-for="Input.User_Role" asp-Items="Model.RoleSelectList" class="form-control"></select>
+                    <span asp-validation-for="Input.User_Role" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control form-control-sm" placeholder="" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.FullName"></label>
+                    <input asp-for="Input.FullName" class="form-control form-control-sm" placeholder="" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.PhoneNumber"></label>
+                        <input asp-for="Input.PhoneNumber" class="form-control " placeholder="" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.DOB"></label>
+                        <input asp-for="Input.DOB" class="form-control " placeholder="" />
+                        <span asp-validation-for="Input.DOB" class="text-danger"></span>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Address"></label>
+                        <input asp-for="Input.Address" class="form-control" id="inputAddress" placeholder="Full Address">
+                        <span asp-validation-for="Input.Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" id="inputEmail4" placeholder="">
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" id="inputPassword4" placeholder="">
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn button5">Register</button>
+</form>
+
+        </div>
+        
+        <div class="col-md-6 ">
+        <section>
+            <h4>Your Current Location.</h4>
+            <hr />
+            <form id="form1" runat="server">
+                <div id="map_canvas" style="width: 100%; height: 400px"></div>
+            </form>
+        </section>
+    </div>
+    </div>
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

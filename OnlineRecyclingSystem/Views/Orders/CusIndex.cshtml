@@ -1,0 +1,102 @@
+﻿@model IEnumerable<OnlineRecyclingSystem.Models.Order>
+
+@using Microsoft.AspNetCore.Identity
+@using OnlineRecyclingSystem.Areas.Identity.Data
+
+@inject UserManager<OnlineRecyclingSystemUser> UserManager
+@{
+    ViewData["Title"] = "CusIndex";
+}
+
+<h1>Your Orders</h1>
+<form>
+    
+    Sort Your Order By @Html.DropDownList("OrderStatus", "All")
+    <br /> <br />
+    <input type="submit" name="search" value="Sort!" />
+    <br /> <br />
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CusContact)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.DriverName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverContact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        
+            @if (UserManager.GetUserName(User) == item.CusName)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CusContact)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.DriverName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DriverContact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+
+                <td>
+                    @if (item.OrderStatus == "Ongoing")
+                    {
+                    <a asp-action="CusEdit" asp-route-id="@item.ID">Edit Order</a>
+                    <br>
+                    <a asp-action="CusDelete" asp-route-id="@item.ID">Cancel Order</a>
+                    }
+                    else
+                    {
+
+                    }
+                </td>
+            </tr>
+            }
+            
+        }
+    </tbody>
+</table>
+
+
+

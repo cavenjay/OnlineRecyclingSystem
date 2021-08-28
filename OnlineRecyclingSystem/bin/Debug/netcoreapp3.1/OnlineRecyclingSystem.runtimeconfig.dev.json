@@ -1,0 +1,10 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\caven\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\caven\\.nuget\\packages",
+      "D:\\NuGetPackages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ]
+  }
+}

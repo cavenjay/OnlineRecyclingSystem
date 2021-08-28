@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\caven\Desktop\Degree Year 3\SEM 2\FYP sem 2\OnlineRecyclingSystem\OnlineRecyclingSystem\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\caven\Desktop\Degree Year 3\SEM 2\FYP sem 2\OnlineRecyclingSystem\OnlineRecyclingSystem\obj\Release\netcoreapp3.1\PubTmp\EFSQLScripts\OnlineRecyclingSystem.Data.OnlineRecyclingSystemContext.sql" />
+  <dbfullsql path="C:\Users\caven\Desktop\Degree Year 3\SEM 2\FYP sem 2\OnlineRecyclingSystem\OnlineRecyclingSystem\obj\Release\netcoreapp3.1\PubTmp\EFSQLScripts\OnlineRecyclingSystem.Data.OnlineRecyclingSystemOrder.sql" />
+</sitemanifest>

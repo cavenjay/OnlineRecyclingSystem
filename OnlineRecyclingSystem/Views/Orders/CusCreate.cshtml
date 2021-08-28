@@ -1,0 +1,142 @@
+﻿@model OnlineRecyclingSystem.Models.Order
+
+@using Microsoft.AspNetCore.Identity
+@using OnlineRecyclingSystem.Areas.Identity.Data
+
+@inject UserManager<OnlineRecyclingSystemUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+}
+<head runat="server">
+    <title>Get User Current Location using Google Map Geolocation API Service in asp.net website</title>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEF-Z3DNDyKgcHdy8G2FS3uie0iBj1ArU&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success);
+    } else {
+        alert("Geo Location is not supported on your current browser!");
+    }
+    function success(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var city = position.coords.locality;
+        var myLatlng = new google.maps.LatLng(latitude, longitude);
+        var myOptions = {
+            center: myLatlng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "lat: " + latitude + " long: " + longitude
+        });
+
+        marker.setMap(map);
+        var infowindow = new google.maps.InfoWindow({ content: "<b>Your Address</b><br/> Latitude:" + latitude + "<br /> Longitude:" + longitude + "" });
+        infowindow.open(map, marker);
+    }
+    </script>
+</head>
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="CusCreate">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row g-3">
+                <div class="col">
+                    <label asp-for="OrderDate" class="control-label">Order Date</label>
+                    <input asp-for="OrderDate" class="form-control" />
+                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="OrderTime" class="control-label">Pick Up Time</label>
+                    <select id="time" asp-for="OrderTime" class="form-control">
+                        <option value="8am-11am" selected>8am-11am</option>
+                        <option value="11am-2pm">11am-2pm</option>
+                        <option value="2pm-5pm">2pm-5pm</option>
+                        <option value="5pm-8pm" >5pm-8pm</option>
+                    </select>
+                    <span asp-validation-for="OrderTime" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusName" class="control-label">Name</label>
+                <input asp-for="CusName" class="form-control" value="@UserManager.GetUserName(User)" readonly/>
+                <span asp-validation-for="CusName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusContact" class="control-label">Contact Number</label>
+                <input asp-for="CusContact" class="form-control" placeholder="Reconfirm Phone Number" />
+                <span asp-validation-for="CusContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusAddress" class="control-label">Pick Up Address</label>
+                <input asp-for="CusAddress" class="form-control" placeholder="Reconfirm Address" />
+                <span asp-validation-for="CusAddress" class="text-danger"></span>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label asp-for="BigBottle" class="control-label">Big Plastic Bottle</label>
+                    <input asp-for="BigBottle" class="form-control" placeholder="Enter amount of Bottles"/>
+                    <span asp-validation-for="BigBottle" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="SmallBottle" class="control-label">Small Plastic Bottle</label>
+                    <input asp-for="SmallBottle" class="form-control" placeholder="Enter amount of Bottles"/>
+                    <span asp-validation-for="SmallBottle" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Can" class="control-label"></label>
+                <input asp-for="Can" class="form-control" placeholder="Enter amount of Cans"/>
+                <span asp-validation-for="Can" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverName" class="control-label"></label>
+                <input asp-for="DriverName" class="form-control" placeholder="Will be assigned" readonly="readonly"/>
+                <span asp-validation-for="DriverName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverContact" class="control-label"></label>
+                <input asp-for="DriverContact" class="form-control" placeholder="Will be assigned" readonly="readonly"/>
+                <span asp-validation-for="DriverContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <input asp-for="OrderStatus" class="form-control" value="Ongoing" readonly="readonly"/>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    </div>
+    <div class="col-md-6 ">
+        <section>
+            <h4>Your Current Location.</h4>
+            <hr />
+            <form id="form1" runat="server">
+                <div id="map_canvas" style="width: 100%; height: 400px"></div>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,94 @@
+﻿@model OnlineRecyclingSystem.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="row g-3">
+                <div class="col">
+                    <label asp-for="OrderDate" class="control-label">Order Date</label>
+                    <input asp-for="OrderDate" class="form-control" />
+                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="OrderTime" class="control-label">Pick Up Time</label>
+                    <select id="time" asp-for="OrderTime" class="form-control">
+                        <option value="8am-11am" selected>8am-11am</option>
+                        <option value="11am-2pm">11am-2pm</option>
+                        <option value="2pm-5pm">2pm-5pm</option>
+                        <option value="5pm-8pm">5pm-8pm</option>
+                    </select>
+                    <span asp-validation-for="OrderTime" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusName" class="control-label"></label>
+                <input asp-for="CusName" class="form-control" />
+                <span asp-validation-for="CusName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusContact" class="control-label"></label>
+                <input asp-for="CusContact" class="form-control" />
+                <span asp-validation-for="CusContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusAddress" class="control-label"></label>
+                <input asp-for="CusAddress" class="form-control" />
+                <span asp-validation-for="CusAddress" class="text-danger"></span>
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <label asp-for="BigBottle" class="control-label">Big Plastic Bottle</label>
+                    <input asp-for="BigBottle" class="form-control" placeholder="Enter amount of Bottles" />
+                    <span asp-validation-for="BigBottle" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="SmallBottle" class="control-label">Small Plastic Bottle</label>
+                    <input asp-for="SmallBottle" class="form-control" placeholder="Enter amount of Bottles" />
+                    <span asp-validation-for="SmallBottle" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Can" class="control-label"></label>
+                <input asp-for="Can" class="form-control" />
+                <span asp-validation-for="Can" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverName" class="control-label"></label>
+                <input asp-for="DriverName" class="form-control" />
+                <span asp-validation-for="DriverName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverContact" class="control-label"></label>
+                <input asp-for="DriverContact" class="form-control" />
+                <span asp-validation-for="DriverContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <select id="" asp-for="OrderStatus" class="form-control">
+                    <option value="Ongoing" selected>Ongoing</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

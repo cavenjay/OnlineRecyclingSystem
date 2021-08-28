@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link href="~/css/Home.css" rel="stylesheet" type="text/css" />
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Online Recycling System </h1>
+
+    </div>
+    
+    <img src="/Image/re2.jpg" alt="Image" height="300" width=100%>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>About Us</h2>
+
+            <p>
+                To know more about us, what are we doing and how are we helping the environment.
+            </p>
+            <input type=button style="color:#0f4c26" onClick="parent.location='AboutUs/Index'" value='click here'>
+
+        </div>
+
+        <div class="col-md-4">
+            <h2>Contact Us</h2>
+
+            <p>
+                To contact us or book an appointment to meet us.
+            </p>
+            <input type=button style="color:#0f4c26" onClick="parent.location='Home/Privacy'" value='click here'>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Register an Account</h2>
+
+            <p>
+                To create a new account as a Customer
+                or a Driver.
+            </p>
+            <input type=button style="color:#0f4c26" onClick="parent.location='Identity/Account/Register'" value='click here'>
+        </div>
+    </div>
+
+</body>

@@ -1,0 +1,5 @@
+﻿body {
+    background-color: #b8f1cd;
+    /**gradient background*/
+    background: linear-gradient(180deg, #ffffff, #b8f1cd );
+}
